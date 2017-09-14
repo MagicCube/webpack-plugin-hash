@@ -8,7 +8,6 @@ function HashWebpackPlugin(options) {
 HashWebpackPlugin.prototype.apply = function (compiler) {
   // See https://webpack.js.org/api/plugins/compiler/#event-hooks
   compiler.plugin('after-emit', (compilation, callback) => {
-    console.log(this.options);
     var hash = compilation.hash;
     if (this.options && typeof(this.options.callback) === 'function') {
       this.options.callback(null, hash);

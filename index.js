@@ -1,15 +1,16 @@
 // Written in ES5
 'use strict';
 
-function HashWebpackPlugin() {
-
+function HashWebpackPlugin(options) {
+  this.options = options;
 };
 
 HashWebpackPlugin.prototype.apply = function (compiler) {
   // See https://webpack.js.org/api/plugins/compiler/#event-hooks
-  compiler.plugin('after-emit', function(compilation, callback) {
+  compiler.plugin('after-emit', (compilation, callback) => {
+    console.log(this.options);
     var hash = compilation.hash;
-    if (typeof(this.options.callback) === 'function') {
+    if (this.options && typeof(this.options.callback) === 'function') {
       this.options.callback(null, hash);
     }
     callback(null);
